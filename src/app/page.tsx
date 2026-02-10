@@ -11,13 +11,27 @@ import { useEffect } from 'react'
 
 export default function Home() {
     useEffect(() => {
+        const enterTime = Date.now();
+
+        let duration = 0;
+        window.addEventListener('beforeunload', () => {
+            duration = Date.now() - enterTime;
+        });
+
+        let interacted = false;
+        ['scroll', 'mousemove', 'keydown', 'touchstart']
+            .forEach(e => window.addEventListener(e, () => interacted = true, { once: true }));
+
         const timer = setTimeout(() => {
             const visitData = {
                 userAgent: navigator.userAgent,
                 screenWidth: window.innerWidth,
                 screenHeight: window.innerHeight,
                 referrer: document.referrer,
-                language: navigator.language
+                language: navigator.language,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                duration: duration,
+                interacted: interacted
             }
 
             fetch('/api/visit', {
@@ -37,7 +51,7 @@ export default function Home() {
                 .catch((error) => {
                     console.error('Error sending visit notification:', error)
                 })
-        }, 1000)
+        }, 5000)
 
         return () => clearTimeout(timer)
     }, [])

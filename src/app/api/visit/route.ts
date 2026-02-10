@@ -2,7 +2,8 @@ import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
     try {
-        const { userAgent, screenWidth, screenHeight, referrer, language } = await req.json()
+        const { userAgent, screenWidth, screenHeight, referrer, language, duration, interacted } =
+            await req.json()
 
         const webhookUrl = process.env.DISCORD_WEBHOOK_URL
 
@@ -40,12 +41,22 @@ export async function POST(req: Request) {
                             name: '瀏覽器語言',
                             value: language,
                             inline: true
+                        },
+                        {
+                            name: '停留時間',
+                            value: `${formatDuration(duration)}`,
+                            inline: true
+                        },
+                        {
+                            name: '互動狀態',
+                            value: interacted ? '有互動' : '無互動',
+                            inline: true
                         }
                     ],
                     timestamp: new Date().toISOString(),
                     footer: {
                         text: '來自你的網站',
-                        icon_url: 'https://your-website.com/your-website-icon.png'
+                        icon_url: 'https://paperdesu.netlify.app/favicon.png'
                     }
                 }
             ]
@@ -75,4 +86,10 @@ export async function POST(req: Request) {
             { status: 500 }
         )
     }
+}
+
+function formatDuration(duration: number) {
+    const seconds = Math.floor(duration / 1000)
+    const milliseconds = duration % 1000
+    return `${seconds}s ${milliseconds}ms`
 }
