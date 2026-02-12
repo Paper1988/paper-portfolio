@@ -2,17 +2,13 @@ import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
 // 支援的語言清單
-const SUPPORTED_LOCALES = ['zh-TW', 'en', 'ja']
+const SUPPORTED_LOCALES = ['zh-TW', 'en']
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
     const url = req.nextUrl.clone()
 
     // 如果已經在 locale 子路徑下，就跳過
-    if (
-        url.pathname.startsWith('/en') ||
-        url.pathname.startsWith('/zh-TW') ||
-        url.pathname.startsWith('/ja')
-    ) {
+    if (url.pathname.startsWith('/en') || url.pathname.startsWith('/zh-TW')) {
         return NextResponse.next()
     }
 
