@@ -1,8 +1,8 @@
 'use client'
 
+import Navbar from '@/components/Navbar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import Navbar from '@/components/Navbar'
 import { ArrowLeft, ExternalLink, Github } from 'lucide-react'
 import { motion } from 'motion/react'
 import Image from 'next/image'
@@ -24,16 +24,15 @@ export default function Project() {
                 '機器人採用模組化架構設計，易於擴展和維護，並支援多伺服器部署。'
             ],
             image: '/paper.png',
-            technologies: ['Discord.js', 'MongoDB', 'Distube', 'Discord API', 'Railway.app'],
+            technologies: ['Discord.js', 'MongoDB', 'Moonlink.js', 'Discord API', 'Railway.app'],
             features: [
                 '音樂播放系統',
                 '伺服器管理工具',
-                '等級系統',
                 '抽獎功能',
                 '多伺服器支援'
             ],
             demoUrl: 'https://discord.com/discovery/applications/869166906765103135',
-            githubUrl: 'https://github.com/Paper1988/paper_p'
+            githubUrl: 'https://github.com/Paper1988/Paper-app'
         },
         docontrib: {
             title: 'DoContrib',
