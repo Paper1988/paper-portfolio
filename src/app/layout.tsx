@@ -19,7 +19,7 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
     title: {
-        default: 'Home | Paper',
+        default: 'Home',
         template: '%s | Paper'
     },
     description:
@@ -55,11 +55,12 @@ export const metadata: Metadata = {
     // 其他可選的 Meta Tags
     robots: 'index, follow', // 告訴搜尋引擎爬蟲是否索引和追蹤此頁面
     icons: {
-        icon: 'https://paperdesu.netlify.app/favicon.png',
-        shortcut: 'https://paperdesu.netlify.app/favicon.png',
-        apple: 'https://paperdesu.netlify.app/favicon.png'
-    }
-    // manifest: '/site.webmanifest' // PWA (Progressive Web App) 的 manifest 檔案
+        icon: 'https://paperdesu.netlify.app/favicon.ico',
+        shortcut: 'https://paperdesu.netlify.app/favicon.ico',
+        apple: 'https://paperdesu.netlify.app/favicon.ico'
+    },
+
+    manifest: '/site.webmanifest' // PWA (Progressive Web App) 的 manifest 檔案
 }
 
 export default async function RootLayout({
