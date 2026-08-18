@@ -5,7 +5,7 @@ import { ArrowLeft } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
-import { JSX, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface TimelineEvent {
     title: string
@@ -117,7 +117,7 @@ const AnimatedTimelineEventCard = ({ event, delay }: { event: TimelineEvent; del
             className={clsx(
                 'bg-card p-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl relative pl-16 pt-10',
                 {
-                    'animate-fade-in-up': isVisible,
+                    'animate-fade-in': isVisible,
                     'opacity-0': !isVisible
                 }
             )}
@@ -142,8 +142,6 @@ const AnimatedTimelineEventCard = ({ event, delay }: { event: TimelineEvent; del
         </div>
     )
 }
-
-const charDelay = 0.01
 
 export default function AboutPage() {
     const t = useTranslations('Home')
@@ -177,52 +175,17 @@ export default function AboutPage() {
                                 {t('about.p1')}
                             </motion.p>
                             <div className="text-lg leading-relaxed text-muted-foreground whitespace-pre-wrap">
-                                {
-                                    ([2, 3, 4] as const).reduce(
-                                        (acc, i) => {
-                                            const chars = Array.from(t(`about.p${i}`))
-                                            const baseDelay = acc.totalChars * charDelay
-                                            acc.totalChars += chars.length
-                                            acc.elements.push(
-                                                <p
-                                                    key={i}
-                                                    className="text-lg leading-relaxed text-muted-foreground"
-                                                >
-                                                    {chars.map((char, charIdx) => (
-                                                        <motion.span
-                                                            key={charIdx}
-                                                            className="inline-block"
-                                                            initial={{ opacity: 0, y: 10 }}
-                                                            animate={{ opacity: 1, y: 0 }}
-                                                            variants={{
-                                                                hidden: {
-                                                                    filter: 'blur(10px)',
-                                                                    transform: 'translateY(20%)',
-                                                                    opacity: 0
-                                                                },
-                                                                visible: {
-                                                                    filter: 'blur(0)',
-                                                                    transform: 'translateY(0)',
-                                                                    opacity: 1
-                                                                }
-                                                            }}
-                                                            transition={{
-                                                                duration: 1,
-                                                                ease: [0.25, 0.1, 0.25, 1],
-                                                                delay:
-                                                                    baseDelay + charIdx * charDelay
-                                                            }}
-                                                        >
-                                                            {char === ' ' ? '\u00A0' : char}
-                                                        </motion.span>
-                                                    ))}
-                                                </p>
-                                            )
-                                            return acc
-                                        },
-                                        { totalChars: 0, elements: [] as JSX.Element[] }
-                                    ).elements
-                                }
+                                {([2, 3, 4] as const).map((i) => (
+                                    <motion.p
+                                        key={i}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ duration: 0.8, ease: 'easeOut' }}
+                                        className="text-lg leading-relaxed text-muted-foreground"
+                                    >
+                                        {t(`about.p${i}`)}
+                                    </motion.p>
+                                ))}
                             </div>
                         </div>
                         <div className="h-8 md:h-10"></div>
