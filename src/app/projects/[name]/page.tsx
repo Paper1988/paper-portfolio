@@ -25,14 +25,10 @@ export default function Project() {
             ],
             image: '/paper.png',
             technologies: ['Discord.js', 'MongoDB', 'Moonlink.js', 'Discord API', 'Railway.app'],
-            features: [
-                '音樂播放系統',
-                '伺服器管理工具',
-                '抽獎功能',
-                '多伺服器支援'
-            ],
+            features: ['音樂播放系統', '伺服器管理工具', '抽獎功能', '多伺服器支援'],
             demoUrl: 'https://discord.com/discovery/applications/869166906765103135',
-            githubUrl: 'https://github.com/Paper1988/Paper-app'
+            githubUrl: 'https://github.com/Paper1988/Paper-app',
+            showDemoLink: true
         },
         docontrib: {
             title: 'DoContrib',
@@ -55,7 +51,8 @@ export default function Project() {
                 '多格式支援'
             ],
             demoUrl: '#',
-            githubUrl: '#'
+            githubUrl: '#',
+            showDemoLink: false
         }
     }
 
@@ -174,7 +171,10 @@ export default function Project() {
                                 <h3 className="text-2xl font-bold mb-4">主要功能</h3>
                                 <ul className="space-y-2">
                                     {project.features.map((feature, index) => (
-                                        <li key={index} className="flex items-center text-muted-foreground">
+                                        <li
+                                            key={index}
+                                            className="flex items-center text-muted-foreground"
+                                        >
                                             <div className="w-2 h-2 bg-primary rounded-full mr-3 flex-shrink-0" />
                                             {feature}
                                         </li>
@@ -184,14 +184,29 @@ export default function Project() {
 
                             {/* 操作按鈕 */}
                             <div className="flex flex-col sm:flex-row gap-4">
-                                <Button asChild size="lg" className="flex items-center">
-                                    <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
-                                        <ExternalLink className="mr-2 h-4 w-4" />
-                                        查看演示
-                                    </a>
-                                </Button>
-                                <Button asChild variant="outline" size="lg" className="flex items-center">
-                                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                                {project.showDemoLink && (
+                                    <Button asChild size="lg" className="flex items-center">
+                                        <a
+                                            href={project.demoUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <ExternalLink className="mr-2 h-4 w-4" />
+                                            查看演示
+                                        </a>
+                                    </Button>
+                                )}
+                                <Button
+                                    asChild
+                                    variant="outline"
+                                    size="lg"
+                                    className="flex items-center"
+                                >
+                                    <a
+                                        href={project.githubUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
                                         <Github className="mr-2 h-4 w-4" />
                                         查看原始碼
                                     </a>
@@ -221,9 +236,7 @@ export default function Project() {
                                 </Button>
                             </Link>
                             <Link href="/#contact">
-                                <Button size="lg">
-                                    聯絡我
-                                </Button>
+                                <Button size="lg">聯絡我</Button>
                             </Link>
                         </div>
                     </motion.div>
