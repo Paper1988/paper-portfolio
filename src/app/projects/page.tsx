@@ -17,6 +17,7 @@ export default function ProjectsPage() {
             technologies: ['Discord.js', 'MongoDB', 'Distube', 'Discord API', 'Railway.app'],
             linkText: t('projects.paper.demoText'),
             linkHref: 'https://discord.com/oauth2/authorize?client_id=869166906765103135',
+            showDemoLink: true,
             projectPage: '/projects/paper'
         },
         {
@@ -27,6 +28,7 @@ export default function ProjectsPage() {
             technologies: ['Next.js', 'Tailwind CSS', 'Supabase', 'Vercel'],
             linkText: t('projects.docontrib.demoText'),
             linkHref: '#',
+            showDemoLink: false,
             projectPage: '/projects/docontrib'
         }
     ]
@@ -100,15 +102,17 @@ export default function ProjectsPage() {
                                         查看詳情
                                     </Link>
                                 </motion.div>
-                                <motion.a
-                                    href={project.linkHref}
-                                    className="inline-flex items-center justify-center px-4 py-2 border border-border text-foreground rounded-md text-sm font-medium hover:bg-muted transition-colors duration-200"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    whileTap={{ scale: 0.95 }}
-                                >
-                                    {project.linkText} <ArrowRight className="ml-2 h-4 w-4" />
-                                </motion.a>
+                                {project.showDemoLink && (
+                                    <motion.a
+                                        href={project.linkHref}
+                                        className="inline-flex items-center justify-center px-4 py-2 border border-border text-foreground rounded-md text-sm font-medium hover:bg-muted transition-colors duration-200"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        whileTap={{ scale: 0.95 }}
+                                    >
+                                        {project.linkText} <ArrowRight className="ml-2 h-4 w-4" />
+                                    </motion.a>
+                                )}
                             </div>
                         </motion.div>
                     ))}
